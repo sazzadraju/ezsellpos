@@ -1,0 +1,65 @@
+<table id="bank_acc_tbl" class="table table-bordred table-striped">
+    <thead>
+    <tr>
+        <th class="text-center"><?= lang("invoice"); ?></th>
+        <?php /*?><th><?= lang("date"); ?></th><?php */?>
+        <th class="text-center"><?= lang("total"); ?></th>
+        <th class="text-center"><?= lang("due"); ?></th>
+        <th class="text-center"><?= lang("pay"); ?></th>
+        <th class="text-center">Sataled</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php if (!empty($unpaid_orders)):
+        $count = 1;
+        $td = 0;
+        foreach ($unpaid_orders as $uo):?>
+        <tr>
+            <td><?=$uo['invoice_no'];?></td>
+            <?php /*?><td><?php echo nice_datetime($uo['dtt_add']); ?></td><?php */?>
+            <td class="text-right"><?=$uo['tot_amt'];?></td>
+            <td class="text-right"><?=$uo['due_amt'];?></td>
+            <td>
+                <input class="form-control text-right pay_amt_cls" type="text" name="pay_amt[]" id="pay_amt_<?=$count;?>" onkeypress="return amountInpt(this,event);">
+                
+            </td>
+            <td>
+                <input class="form-control" type="checkbox" name="sataled_<?=$uo['invoice_no'];?>" id="sataled_<?=$count;?>" value="1">
+                <label for="sataled_<?=$count;?>">&nbsp;</label>
+                <input type="hidden" name="param[]" id="param_<?=$count;?>" value="<?=$uo['params'];?>" />
+            </td>
+        </tr><?php
+        $count++;
+            $td+=$uo['due_amt'];
+        endforeach;?>
+        <tr>
+            <td colspan="2" class="text-right" ><b>Total Due:</b></td>
+            <td class="text-right" ><b><?=$td?></b></td>
+            <td>
+                <input type="text" class="form-control text-right" name="pay_amt_tot" id="pay_amt_tot" value="" readonly="" >
+                <label id="pay_amt_tot-error" class="error" for="pay_amt_tot"></label>
+            </td>
+        </tr> 
+    <?php else:?>
+        <tr>
+            <td colspan="4"><?=lang('data_not_available');?></td>
+        </tr> 
+    <?php endif; ?>
+    </tbody>
+</table>
+
+
+<script>
+$(document).ready(function(){
+    $('input.pay_amt_cls').on('input', function(e){
+        var tot = 0;
+        $('input.pay_amt_cls').each(function() {
+            var val = parseFloat($(this).val());
+            if(!isNaN(val)){
+                tot += val;
+            }
+        });
+        $('#pay_amt_tot').val(tot.toFixed(2));
+    });
+});
+</script>

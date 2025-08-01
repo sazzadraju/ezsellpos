@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1{
+    font-size: 38px;
+}
+body {
+    background: #eee;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+.container {
+    max-width: 870px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0px 15px;
+}
+
+.invoice {
+    width: 100%;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0px 0px 3px #aaa;
+    margin: 15px 0px;
+}
+
+header {
+    width: 100%;
+    background: ;
+    background: ;
+    padding-top: 40px;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/*logo*/
+.brand-inf {
+    width: 20%;
+    float: left;
+}
+
+.in-logo {
+    width: 100%;
+    float: left;
+    height: 70px;
+}
+
+.in-logo img {
+    height: 100%;
+    padding-top: 10px;
+}
+
+.in-no {
+    width: 80%;
+    float: right;
+    padding: 0px 10px;
+    text-align: right;
+}
+
+.from-inf img {
+    width: 50%;
+}
+
+
+/*in-from-to*/
+.in-from-to {
+    width: 100%;
+}
+
+.in-from-to::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.from-inf {
+    width: 50%;
+    float: left;
+}
+
+.in-no ul {
+    margin: 0;
+    padding: 0;
+}
+
+.in-no ul li {
+    list-style: none;
+    display: inline-block;
+    width: 400px;
+}
+
+
+
+.from-inf {
+    width: 30%;
+    float: left;
+}
+
+.to-inf {
+    width: 70%;
+    float: right;
+    text-align: right;
+}
+
+.to-inf ul {
+    margin: 0;
+    padding: 0;
+    padding-top: 10px;
+}
+
+.to-inf ul li {
+    list-style: none;
+    line-height: 2px;
+}
+
+/*table*/
+
+#products {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #000;
+}
+#products::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+#products td,
+#products th {
+    border: 1px solid #000;
+    padding: 8px;
+    font-weight: 500;
+    font-size: 14px;
+}
+#products th{
+    text-align: center;
+    font-weight: bolder;
+}
+
+#products tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#products tr:hover {
+    background-color: #ddd;
+}
+
+#products th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: darkslategrey;
+    color: white;
+}
+
+.bold {
+    font-weight: bold;
+    width: 130px;
+    display: inline-block;
+}
+
+
+.table-break{
+    width: 100%;
+}
+.table-break::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.table-left{
+    width: 50%;
+    float: left;
+}
+
+.sales-person{
+    width: 100%;
+    padding: 10px 10px;
+    border-left:1px solid #eee;
+}
+.comment{
+    width: 100%;
+    padding: 10px 10px;
+    border: 1px solid #eee;
+}
+.delivery-details{
+    width: 100%;
+    padding: 10px 10px;
+    border: 1px solid #eee;
+    line-height: 16px;
+}
+.delivery-details h3{
+    padding: 2px 0px;
+}
+.table-right{
+    width: 50%;
+    float: right;
+}
+/*signature*/
+
+.signature {
+    width: 100%;
+    padding: 90px 0px 20px 0px;
+}
+
+.signature::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.auth-sig {
+    width: 30%;
+    float: left;
+}
+
+
+.cust-sig {
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+
+.invoice{
+    padding: 0 10px;
+}
+
+.right{
+    text-align: right;
+}
+
+.left{
+    text-align: left;
+}
+
+.center{
+    text-align: center;
+}

@@ -1,0 +1,150 @@
+*{
+	box-sizing: border-box;
+}
+
+.invoice-w {
+	font-family: "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	max-width: 800px;
+	position: relative;
+	overflow: hidden;
+	padding: 20px; 
+    font-size: 12px;
+}
+.invoice-w strong{
+	font-weight: bold;
+}
+
+
+.invoice-header { 
+    text-align: center;
+}
+
+
+
+.invoice-logo {
+    text-align: center;
+	width: 100%;
+}
+.invoice-logo img {
+	width: 200px;
+	display: inline;
+}
+
+.in-head{
+	width: 100%;
+	border-bottom: 3px solid #000;
+	margin-bottom: 15px;
+}
+.in-head::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+.in-head-con{
+	width: 33.33%;
+	float: left;
+	padding: 0px 0px 20px 0px;
+}
+.in-head-con h2{
+	padding:0!important;
+}
+.in-head-con span.head-text{
+	font-size: 16px;
+	font-weight: bold;
+}
+.in-head-con .hidden{
+	color: #fff;
+}
+
+.header-left {
+	width: 40%;
+	float: left;
+	padding: 10px;
+	border: 1px solid #222;
+}
+.header-left table tr td:first-child {
+	font-weight: bold;
+	width: 130px;
+	text-align: left;
+}
+.header-left table tr td~td { 
+	text-align: left;
+}
+ 
+.header-right { 
+	float: right; 
+}
+.invoice-body {
+	width: 100%;
+	float: left;
+	margin: 10px 0;
+}
+.invoice-body table{
+	width: 100%;  
+    
+}
+.table,  th, tr, td{ 
+    border-collapse: collapse
+    
+}
+.table tr td {
+	border: 0;
+	border-left: 1px solid;
+}
+
+
+.terms{
+    text-align: center;
+}
+.terms-content{
+    font-weight: 600;
+}
+
+.devt-by {
+	margin-top: 10px;
+	text-align: center;
+	border-top: 1px dashed;
+	padding-top: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.invoice-footer {
+	font-family: "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+	width: 95%; 
+	position: absolute;
+	bottom: 0;
+	font-size: 12px;
+	padding: 20px;
+	margin: 0 auto; 
+}
+page {
+	background: white;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 0.5cm;
+	box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+}
+
+page[size="A4"] {
+	width: 21cm;
+	/* height: 29.7cm; */
+	position: relative;
+	padding-bottom: 105px;
+}
+
+@media print {
+	body,
+	page {
+		margin: 0;
+		box-shadow: 0;
+	}
+}

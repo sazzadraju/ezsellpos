@@ -1,0 +1,203 @@
+	@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+	.exclusive {
+		width: 400px;
+		margin: 0 auto;
+		padding: 50px;
+		-webkit-box-shadow: 0px 0px 5px 1px #ddd;
+		box-shadow: 0px 0px 5px 1px #ddd;
+		margin-top: 60px;
+		text-align: center;
+		border: 1px solid #ddd;
+		font-family: 'Roboto', sans-serif;;
+	}
+	
+ .pricing-header h3 {
+	margin: 10px 0;
+	font-weight: normal;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	color: #047BF8;
+	font-size: 14px;
+}
+	
+	.pricing-header {
+		margin-bottom: 50px;
+	}
+	
+	.pricing-features {
+		margin: 0;
+		padding: 0;
+	}
+	
+	ul.pricing-features li {
+		list-style: none;
+		display: inline-block;
+		padding: 10px 0;
+		width: 100%;
+		text-align: left;
+	}
+ 
+.fixed-center {
+	float: right;
+	text-align: center;
+	width: 50%;
+}
+ul.pricing-features li em {
+	border: 1px solid #0861BF;
+	padding: 3px 8px;
+	color: #fff;
+	border-radius: 14px;
+	font-style: normal;
+	font-size: 14px;
+	text-align: center;
+	/* float: right; */
+	background: #047BF8;
+	box-shadow: 0px 0px 3px 0px #455aff;
+	display: inline-block;
+	text-align: center;
+}
+	
+	.alert-msg {
+		padding: 4px 15px;
+		background: #ea2d1f;
+		font-size: 18px;
+		color: #fff;
+		-webkit-box-shadow: 0px 0px 8px 0px #c92828;
+		box-shadow: 0px 0px 8px 0px #c92828;
+		border-radius: 20px;
+		margin-top: 25px;
+		position: relative;
+		text-align: left;
+		font-size: 16px;
+	}
+	
+	.alert-msg::after {
+		font-family: FontAwesome;
+		font-style: normal;
+		font-weight: normal;
+		content: "\f12a";
+		position: absolute;
+		background: #EA2D1F;
+		padding: 4px;
+		border-radius: 50%;
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+		font-size: 18px;
+		font-weight: bold;
+		border: 2px solid #fff;
+		-webkit-box-shadow: 1px 2px 4px 0px #444;
+		box-shadow: 1px 2px 4px 0px #444;
+		top: -8px;
+		right: -7px;
+		text-align: center;
+		-webkit-animation-name: warning;
+		animation-name: warning;
+		-webkit-animation-duration: .8s;
+		animation-duration: .8s;
+		-webkit-animation-iteration-count: infinite;
+		animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+		animation-timing-function: linear;
+		-webkit-animation-direction: alternate;
+		animation-direction: alternate;
+	}
+	
+	.success-msg::after {
+		font-family: FontAwesome;
+		font-style: normal;
+		font-weight: normal;
+		content: "\f00c";
+		position: absolute;
+		background: #0f9c0c;
+		padding: 4px;
+		border-radius: 50%;
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+		font-size: 18px;
+		font-weight: bold;
+		border: 2px solid #fff;
+		-webkit-box-shadow: 1px 2px 4px 0px #444;
+		box-shadow: 1px 2px 4px 0px #444;
+		top: -8px;
+		right: -7px;
+		text-align: center;
+		-webkit-animation-name: warning;
+		animation-name: warning;
+		-webkit-animation-duration: .8s;
+		animation-duration: .8s;
+		-webkit-animation-iteration-count: infinite;
+		animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+		animation-timing-function: linear;
+		-webkit-animation-direction: alternate;
+		animation-direction: alternate;
+	}
+	
+	.success-msg {
+		padding: 4px 15px;
+		background: #0f9c0c;
+		font-size: 18px;
+		color: #fff;
+		-webkit-box-shadow: 0px 0px 8px 0px #0f9c0c;
+		box-shadow: 0px 0px 8px 0px #0f9c0c;
+		border-radius: 20px;
+		margin-top: 25px;
+		position: relative;
+		text-align: left;
+		font-size: 16px;
+	}
+	
+	@-webkit-keyframes warning {
+		0% {
+			-webkit-transform: scale(1);
+			transform: scale(1)
+		}
+		100% {
+			-webkit-transform: scale(1.5);
+			transform: scale(1.5)
+		}
+	}
+	
+	@keyframes warning {
+		0% {
+			-webkit-transform: scale(1);
+			transform: scale(1)
+		}
+		100% {
+			-webkit-transform: scale(1.5);
+			transform: scale(1.5)
+		}
+	}
+	
+	.pricing-header img {
+		padding-bottom: 30px;
+		border-bottom: 1px dashed #ccc;
+	}
+	
+.cus-btn {
+	padding: 10px 20px;
+	border: 1px solid #047BF8;
+	border-radius: 23px;
+	text-transform: uppercase;
+	cursor: pointer;
+	-webkit-transition: .2s;
+	-o-transition: .2s;
+	transition: .2s;
+	display: block;
+	width: 238px;
+	margin: 0 auto;
+	color: #212121;
+	letter-spacing: 1px;
+}
+	
+	.cus-btn:hover {
+		background: #047BF8;
+		color: #fff
+	}
+	
+	.pricing-footer {
+		margin-top: 50px;
+	}

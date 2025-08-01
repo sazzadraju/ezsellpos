@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Metrophobic');
+p{
+	margin: 2px 0;
+}
+
+.invoice_content { 
+	margin: 0px auto 0px;
+	overflow: hidden;
+	padding: 0;
+	padding-right: 5px;
+	width: 288px;
+	font-size: 10px;
+	outline: 0;
+	font-family: sans-serif;
+	line-height: 10px;
+	color: #000;
+
+}
+.head{
+	text-align: center
+}
+.cmp-info h4{
+
+	font-size: 16px;
+	margin: 0 0 5px 0;
+	text-transform: uppercase
+
+}
+.invoice-no {
+	text-align: center;
+	font-weight: bold;
+	font-size: 12px;
+}
+.vat {
+	text-align: center;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	margin: 2px 0;
+}
+.bar-code{
+	text-align: center;
+}
+.barcode{
+	width: 100%;
+}
+.cus-info {
+	text-align: left;
+}
+.date {
+	float: left;
+	width: 50%;
+}
+.time {
+	float: left;
+	width: 50%;
+	text-align: right
+}
+.table {
+	border-bottom: 1px solid #000 !important;
+	margin: 0 !important;
+}
+table.table-pay-type th {
+	border-bottom: 0px solid #000 !important;
+}
+table{
+	width: 100%;
+}
+.table table, tr, td, th {
+	border: 0;
+	padding: 2px 0;
+	text-align: left;
+	vertical-align: top !important;
+}
+.table{border: 0 !important}
+.table-pay-type{border: 0 !important}
+.table td {
+	border-bottom: 1px dashed #000 !important;
+	border-top: 0px !important;
+	text-transform: uppercase;
+}
+td span {
+	width: 100%;
+	float: left;
+}
+table td:last-child{
+	text-align: right !important
+}
+table th:last-child{
+	text-align: right !important
+}
+.invoice_content  th{
+	border-top: 1px solid;
+	border-bottom: 1px solid
+}
+
+.head, .middle-content, .foot {
+	float: left;
+	width: 100%;
+}
+
+.bill-total p{
+	float: left
+}
+.bill-total p {
+	width: 120px;
+}
+.bill-total p + p {
+	width: 20px;
+	font-weight: bolder;
+}
+.bill-total p + p + p {
+	width: 98px;
+	text-align: right;
+	font-weight: normal;
+}
+
+
+
+.bill-title {
+	background: #eee none repeat scroll 0 0;
+	color: #444;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 3px;
+	padding: 5px;
+	text-align: center;
+	text-transform: uppercase;
+	margin: 10px 0;
+}
+
+.summury {
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid;
+}.summury1 {
+	 float: left;
+	 width: 100%;
+
+	 border-bottom: 1px dashed;
+ }
+.bill-total {
+	float: left;
+	width: 100%;
+}
+
+.adjustment span{
+	float: right
+}
+.prd {
+	float: left;
+	width: 100%;
+	border-top: 1px dashed;
+}
+
+
+.foot{
+	text-align: center;
+	padding-top: 20px;
+}
+
+
+.no {
+	margin-top: -2px;
+	display: block;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 4px;
+	color: #000;
+}
+.barcode {
+	/*width: 199px;*/
+	/* background: gray;
+     margin:4px;*/
+	text-align: center;
+	float: left;
+	margin-top: 15px !important;
+	margin-bottom: 30px !important;
+	/*margin-right: 2px !important;*/
+	margin-left: 6px !important;
+}
