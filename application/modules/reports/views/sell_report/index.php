@@ -98,12 +98,12 @@
                   <select class="select2" data-live-search="true" id="customer_id" name="customer_id">
                    <option value="0" selected><?= lang("select_one"); ?></option>
                    <?php
-                   foreach ($customers as $customer) {
-                     if (empty($customer->_id_customer)) {
-                       $text = sprintf('%s(%s) - %s', $customer->full_name, $customer->id_customer, $customer->phone);
-                       echo sprintf('<option value="%s" data-tokens="%s %s">%s</option>', $customer->id_customer, $customer->id_customer, $customer->phone, $text);
-                     }
-                   }
+                    foreach ($customers as $customer) {
+                      if (empty($customer->_id_customer)) {
+                        $text = sprintf('%s(%s) - %s', $customer->full_name, $customer->customer_code, $customer->phone);
+                        echo sprintf('<option value="%s" data-tokens="%s %s">%s</option>', $customer->id_customer, $customer->customer_code, $customer->phone, $text);
+                      }
+                    }
                    ?>
                  </select>
                </div>
