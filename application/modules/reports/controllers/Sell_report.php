@@ -33,7 +33,7 @@ class Sell_report extends MX_Controller
         $config['link_func'] = 'searchFilter';
         $this->ajax_pagination->initialize($config);
 
-        $data['customers'] = $this->sell_report_model->getvalue_row('customers', 'id_customer,full_name,phone', array('status_id' => 1));
+        $data['customers'] = $this->sell_report_model->getvalue_row('customers', 'id_customer,customer_code,full_name,phone', array('status_id' => 1));
         $data['customer_types'] = $this->sell_report_model->getvalue_row('customer_types', 'id_customer_type,name', array('status_id' => 1));
         $data['stations'] = $this->sell_report_model->getvalue_row('stations', 'id_station,name', array('status_id' => 1));
         $type = $this->session->userdata['login_info']['user_type_i92'];
