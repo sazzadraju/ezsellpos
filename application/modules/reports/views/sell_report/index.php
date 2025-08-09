@@ -100,7 +100,8 @@
                    <?php
                    foreach ($customers as $customer) {
                      if (empty($customer->_id_customer)) {
-                       echo '<option value="' . $customer->id_customer . '">' . $customer->full_name . '</option>';
+                       $text = sprintf('%s(%s) - %s', $customer->full_name, $customer->id_customer, $customer->phone);
+                       echo sprintf('<option value="%s" data-tokens="%s %s">%s</option>', $customer->id_customer, $customer->id_customer, $customer->phone, $text);
                      }
                    }
                    ?>
