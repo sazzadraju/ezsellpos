@@ -483,7 +483,10 @@
 <script type="text/javascript">
     var x = 1;
     var batch_inc = 1;
+    var toStoreOptions = '';
+    var productListUrl = '<?php echo base_url(); ?>product_stock_list';
     $(document).ready(function () {
+        toStoreOptions = $('#to_store').html();
         var id="<?= $this->session->userdata['login_info']['user_type_i92']?>";
         if(id==3){
             $('#StoreNameForm').modal('toggle');
@@ -493,7 +496,8 @@
             var val_data = str_id.split('&')[0];
             $('#store_from').val(val_id);
             $('#from').val(val_data);
-            $("#to_store option[value='"+val_id+"']").remove();
+            resetToStoreOptions(val_id);
+            loadStoreProducts(val_id);
         }
     });
     $('input[name=acc_type]').click(function(){
@@ -603,7 +607,9 @@
         var val_data = id.split('@')[1];
         $('#store_from').val(val_id);
         $('#from').val(val_data);
-        $("#to_store option[value='"+val_id+"']").remove();
+        resetToStoreOptions(val_id);
+        resetProductDependentFields();
+        loadStoreProducts(val_id);
     }
     function checkSelect() {
         var store = $('#store_name').val();
@@ -615,6 +621,77 @@
         }
 
 
+    }
+
+    function resetToStoreOptions(val_id) {
+        if (toStoreOptions !== '') {
+            $('#to_store').html(toStoreOptions);
+        }
+        $('#to_store').val('0');
+        if (val_id !== undefined && val_id !== null && val_id !== '') {
+            $("#to_store option[value='"+val_id+"']").remove();
+        }
+        $('#to_store').trigger('change.select2');
+    }
+
+    function resetProductDependentFields() {
+        $('#product_name').html("<option value='0' selected><?= lang('select_one'); ?></option>");
+        $('#product_name').val('0');
+        $('#product_name').trigger('change.select2');
+        $('#product_id').val('');
+        $('#stock_batch_no').html('');
+        $('#supplier_name').val('');
+        $('#supplier_id').val('');
+        $('#quantity').val('');
+        $('#ExpiryDate').val('');
+        $('#stck_out_qty').val('');
+        $("#purchase_price").val('');
+        $("#sale_price").val('');
+        $("#stock_rack_name").val('');
+        $('#rack_id').val('');
+        $('#store_id').val('');
+        $('#alert_date').val('');
+        $('#sel_attr').val('');
+        $('#sel_batch_no').val('');
+    }
+
+    function loadStoreProducts(storeId) {
+        if (storeId === undefined || storeId === null || storeId === '' || storeId === '0') {
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: productListUrl,
+            data: {id: storeId},
+            success: function (result) {
+                var $productSelect = $('#product_name');
+                $productSelect.empty();
+                var defaultOption = $('<option/>', {
+                    value: '0',
+                    text: '<?= lang('select_one'); ?>'
+                });
+                defaultOption.prop('selected', true);
+                $productSelect.append(defaultOption);
+                if (result) {
+                    try {
+                        var products = $.parseJSON(result);
+                        $.each(products, function (index, item) {
+                            if (item.id_product !== undefined) {
+                                var option = $('<option/>', {
+                                    value: item.id_product,
+                                    text: item.product_name + '(' + item.product_code + ')'
+                                }).attr('actp', item.product_name);
+                                $productSelect.append(option);
+                            }
+                        });
+                    } catch (e) {
+                        console.error('Failed to parse product list', e);
+                    }
+                }
+                $productSelect.val('0');
+                $productSelect.trigger('change.select2');
+            }
+        });
     }
 
 
