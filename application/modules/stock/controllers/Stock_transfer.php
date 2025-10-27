@@ -106,7 +106,12 @@ class Stock_transfer extends MX_Controller
         $data['columns'] = $this->Stock_transfer_model->getvalue_row('acl_user_column', 'permission', array('menu_url'=>'product_stock_transfer'));
         $data['invoice_id'] = $this->auto_increment->getAutoIncKey('STOCK_OUT_INVOICE', 'stock_mvts', 'invoice_no');
         $data['reason_list'] = $this->Stock_transfer_model->get_stocks_reason();
-        $data['products'] = $this->commonmodel->product_stock_list($this->session->userdata['login_info']['store_id']);
+        $selectedStore = $this->session->userdata['login_info']['store_id'];
+        if (isset($this->session->userdata['login_info']['user_type_i92']) && $this->session->userdata['login_info']['user_type_i92'] == 3) {
+            $data['products'] = array();
+        } else {
+            $data['products'] = $this->commonmodel->product_stock_list($selectedStore);
+        }
         $this->template->load('main', 'stock_transfer/stock_transfer_form', $data);
     }
 
