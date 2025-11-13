@@ -54,10 +54,12 @@ $( function() {
         select: function(event, ui) {
         $('#show_customer_balance').html(ui.item.balance);
         $('#show_customer_phone').html(ui.item.phone);
+        $('#src_customer_balance').val(ui.item.balance);
         $('#src_customer_id').val(ui.item.value);
+        updateCustomerPoints(ui.item.points, true);
         checkCustomerDiscount(ui.item.value);
         return false;
-        } 
+        }
     });
     $( "#src_sales_person" ).autocomplete({
         minLength: 0,
@@ -431,12 +433,14 @@ function amount_check() {
             $('#paid_div').html(paid_div);
         }
         var replace_total = $('#replace_total').html();
+        var remit_total = Number($('#remit_text').text());
+        remit_total = isNaN(remit_total) ? 0 : remit_total;
         var paid_amt = cart + cash + mobile;
-        var all_paid=paid_amt;
+        var all_paid=paid_amt + remit_total;
         $('#paid_amount').html(paid_amt);
         if($.trim(replace_total)){
             replace_total=Number(replace_total);
-            all_paid=paid_amt+replace_total;
+            all_paid=all_paid+replace_total;
         }
         if ($('#round_check').prop("checked") == true) {
             var tot_due_m = all_paid - pr_total;
@@ -686,7 +690,7 @@ function multiple() {
         $('#payCard').addClass('disabled');
         $('#payMob').addClass('disabled');
     }
-        
+
 }
 $('input.m_payment').on('input', function (e) {
     var cart = Number($('#m_card_payment').val());
@@ -980,6 +984,12 @@ function validateSalesForm() {
         return true;
     }
 
+    $(document).ready(function () {
+        var hasCustomer = $('#src_customer_id').val() !== '';
+        var pointsValue = $('#points').val();
+        updateCustomerPoints(pointsValue, hasCustomer);
+    });
+
 }
 function hold_sale() {
     var cus_id = $('#src_customer_id').val();
@@ -1164,23 +1174,66 @@ function restore_hold() {
     function show_points(val) {
         $('#cur_pnt').html(val);
     }
-    // function add_remit_point() {
-    //     var rem = $('#remit').val() * 1;
-    //     var total = $('#cur_pnt').html() * 1;
-    //     $('#remit_error').html('');
-    //     if (rem == 0) {
-    //         $('#remit_error').html('Field is required');
-    //     } else if (rem > total) {
-    //         $('#remit_error').html('Point is too large');
-    //     } else {
-    //         var taka = $('#point_per_amount').val() * 1;
-    //         $('#remit_val').html('<<strong>Remit:</strong> ' + rem +);
-    //         $('#remit_point').val(rem);
-    //         var div='<tr id="show_remit_div"> <td>Remit</td><td id="remit_take">'+ (rem * taka) +'</td> </tr>';
-    //         $('#all_discount').prepend(div);
-    //         $('#remit_taka_val').val(rem * taka);
-    //         $('#pointDetails').modal('toggle');
-    //         totalCalculation();
-    //     }
+    function updateCustomerPoints(points, hasCustomer) {
+        var sanitized = Number(points);
+        if (!hasCustomer || isNaN(sanitized)) {
+            sanitized = 0;
+        }
+        var displayPoints = sanitized;
+        if (Math.floor(displayPoints) !== displayPoints) {
+            displayPoints = displayPoints.toFixed(2);
+        }
+        $('#show_customer_points').html(displayPoints);
+        if (hasCustomer) {
+            $('#points').val(sanitized);
+        } else {
+            $('#points').val('');
+        }
+        $('#remit_point').val('');
+        $('#remit_taka_val').val('');
+        $('#remit_text').html('0.00');
+        $('#remit_summary').hide();
+        $('#remit_val').html('');
+        $('#remit_error').html('');
+        $('#remit').val('');
+        var perAmount = Number($('#point_per_amount').val());
+        if (hasCustomer && sanitized > 0 && perAmount > 0) {
+            $('#remit_val').html('<button type="button" class="btn btn-sm btn-warning ml-2" data-toggle="modal" data-target="#pointDetails" onclick="show_points(' + sanitized + ')">Redeem</button>');
+        }
+        var currentTotal = Number($('#grand_total').text());
+        if (currentTotal > 0) {
+            amount_check();
+        }
+    }
+    function add_remit_point() {
+        var rem = $('#remit').val() * 1;
+        var total = $('#cur_pnt').html() * 1;
+        $('#remit_error').html('');
+        if (rem === 0) {
+            $('#remit_error').html('Field is required');
+        } else if (rem > total) {
+            $('#remit_error').html('Point is too large');
+        } else {
+            var taka = Number($('#point_per_amount').val());
+            if (isNaN(taka)) {
+                taka = 0;
+            }
+            var redeemAmount = rem * taka;
+            var formattedRedeem = redeemAmount.toFixed(2);
+            $('#remit_val').html('<div class="remit-points-show">Remit: ' + rem + '</div>');
+            $('#remit_point').val(rem);
+            $('#remit_taka_val').val(formattedRedeem);
+            $('#remit_text').html(formattedRedeem);
+            $('#remit_summary').show();
+            $('#remit').val('');
+            $('#pointDetails').modal('toggle');
+            totalCalculation();
+        }
 
-    // }
+    }
+
+$(document).ready(function () {
+    var hasCustomer = $('#src_customer_id').val() !== '';
+    var pointsValue = $('#points').val();
+    updateCustomerPoints(pointsValue, hasCustomer);
+});

@@ -1,5 +1,12 @@
-<?php 
+<?php
 include('header.php');
+$pointEarnRate = (!empty($point_earn) && isset($point_earn[0]['param_val'])) ? (float)$point_earn[0]['param_val'] : 0;
+$pointRedeemRate = (!empty($point_remit) && isset($point_remit[0]['param_val'])) ? (float)$point_remit[0]['param_val'] : 0;
+$hasCustomer = (isset($customer_d) && $customer_d);
+$customerPointsValue = $hasCustomer ? (float)$customer_d[0]['points'] : 0;
+$displayCustomerPoints = $hasCustomer ? $customer_d[0]['points'] : '0';
+$pointsFieldValue = $hasCustomer ? $customer_d[0]['points'] : '';
+$showRedeemButton = ($hasCustomer && $customerPointsValue > 0 && $pointRedeemRate > 0);
 ?>
 <div class="panel panel-default" style="background:#e6ffe3;">
     <div class="panel-body">
@@ -66,6 +73,15 @@ include('header.php');
                                         <span id="show_customer_phone" style="color: #fff; font-size: 18px; position: relative;top: -3px;left: 10px;"> <?= $phone?></span><input type="hidden" name="src_customer_balance" id="src_customer_balance" value="<?= $balance?>"><br>
                                         <div class="cus-balance"><?php echo set_currency()?></div>
                                         <span id="show_customer_balance" style="position: relative; top: -29px; left: 64px; font-size: 18px;color: #fff;">  <?= $balance?>  </span><br>
+                                        <div class="customer-points" style="position: relative; top: -23px; left: 64px; font-size: 16px; color: #fff;">
+                                            <span>Points: </span>
+                                            <span id="show_customer_points"><?= $displayCustomerPoints ?></span>
+                                            <span id="remit_val">
+                                                <?php if ($showRedeemButton): ?>
+                                                    <button type="button" class="btn btn-sm btn-warning ml-2" data-toggle="modal" data-target="#pointDetails" onclick="show_points(<?= $customerPointsValue ?>)">Redeem</button>
+                                                <?php endif; ?>
+                                            </span>
+                                        </div>
                                    </div>
                                 </div>
                             </div>
@@ -165,6 +181,11 @@ include('header.php');
             <div class="col-sm-12 col-md-4 body-right">
                 <div class="card" style="height: 90vh;background:#e6ffe3;border:none;">
                     <form action="" id="submit_sales_form" method="post">
+                        <input type="hidden" name="points" id="points" value="<?= $pointsFieldValue === '' ? '' : html_escape($pointsFieldValue) ?>">
+                        <input type="hidden" name="per_point_balance" id="per_point_balance" value="<?= html_escape($pointEarnRate) ?>">
+                        <input type="hidden" name="remit_point" id="remit_point" value="">
+                        <input type="hidden" name="remit_taka_val" id="remit_taka_val" value="">
+                        <input type="hidden" name="point_per_amount" id="point_per_amount" value="<?= html_escape($pointRedeemRate) ?>">
                         <div class="card-body body-right-div" style="padding-top:0px; position: relative;background:#e6ffe3;" id="bodyContent">
                             <div class="cost">
                                 <h2>Cart Total : <span id="cart_total">00</span> <?= set_currency()?></h2>
@@ -196,6 +217,10 @@ include('header.php');
                                         <tr>
                                             <td>Paid (<span id="paid_div"></span>)</td>
                                             <td id="paid_amount">00</td>
+                                        </tr>
+                                        <tr id="remit_summary" style="display:none;">
+                                            <td>Remit</td>
+                                            <td><span id="remit_text">0.00</span></td>
                                         </tr>
                                         <?php  
                                         if($configs->round==0){
@@ -503,6 +528,33 @@ include('header.php');
 <div class="showmessage" id="showMessage" style="display: none;"></div>
 <div class="loading"  style="display: none;">
     <div class="loader"></div>
+</div>
+<div class="modal fade" id="pointDetails" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Redeem Points</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="redeem">
+                    <h4>1 point = <?= set_currency($pointRedeemRate) ?></h4>
+                    <div class="crnt-points">
+                        Current Points: <span id="cur_pnt"></span>
+                    </div>
+                    <div class="remit-points">
+                        Redeem points
+                        <input class="Number" type="text" name="remit" id="remit">
+                    </div>
+                    <span class="error" id="remit_error" style="float: left;text-align: center;"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="add_remit_point()">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 <?php $this->load->view('sales/sale_customer_add');?>
 

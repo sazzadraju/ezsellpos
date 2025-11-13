@@ -28,6 +28,8 @@ class Sales extends MX_Controller
         $this->dynamic_menu->check_menu('sales');
         $this->breadcrumb->add(lang('sales'), 'sales', 0);
         $data['sales_configs'] = $this->sales_model->getvalue_row('configs', 'param_val', array('param_key' => 'SALES_CONFIG'));
+        $data['point_earn'] = $this->sales_model->getvalue_row_one('configs', 'param_val', array('param_key' => 'POINT_EARN_RATIO'));
+        $data['point_remit'] = $this->sales_model->getvalue_row_one('configs', 'param_val', array('param_key' => 'POINT_REDEEM_RATIO'));
         if (isset($_REQUEST['restore'])) {
             $request_id = $_REQUEST['restore'];
             $honds = $this->sales_model->getvalue_row('hold_sales', '*', array('invoice_no' => $request_id));
